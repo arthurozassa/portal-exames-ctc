@@ -1,0 +1,43 @@
+<\!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal de Exames CTC - Teste</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <div id="root">Carregando...</div>
+
+    <script type="text/babel">
+        function App() {
+            return (
+                <div style={{ padding: '20px', textAlign: 'center' }}>
+                    <h1 style={{ color: '#2563eb', fontSize: '2rem' }}>
+                        🩺 Portal de Exames CTC - Teste
+                    </h1>
+                    <p>React está funcionando\!</p>
+                    <div style={{ marginTop: '20px' }}>
+                        <a href="/dist/app-integrated.html" style={{ 
+                            background: '#2563eb', 
+                            color: 'white', 
+                            padding: '10px 20px', 
+                            textDecoration: 'none', 
+                            borderRadius: '8px' 
+                        }}>
+                            Ir para o Portal Completo
+                        </a>
+                    </div>
+                </div>
+            );
+        }
+
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+</body>
+</html>
+EOF < /dev/null

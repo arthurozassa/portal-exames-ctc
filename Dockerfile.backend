@@ -1,0 +1,60 @@
+# Backend Dockerfile
+FROM node:18-alpine AS base
+
+# Instalar dependências do sistema
+RUN apk add --no-cache \
+  python3 \
+  make \
+  g++ \
+  sqlite \
+  sqlite-dev
+
+WORKDIR /app
+
+# Copiar arquivos de dependências
+COPY backend/package*.json ./
+COPY backend/.nvmrc ./
+
+# Instalar dependências
+RUN npm ci --only=production && npm cache clean --force
+
+# Etapa de desenvolvimento
+FROM base AS development
+
+# Instalar dependências de desenvolvimento
+RUN npm ci
+
+# Copiar código fonte
+COPY backend/ ./
+
+# Expor porta
+EXPOSE 3001
+
+# Comando padrão para desenvolvimento
+CMD ["npm", "run", "dev"]
+
+# Etapa de produção
+FROM base AS production
+
+# Criar usuário não-root
+RUN addgroup -g 1001 -S nodejs
+RUN adduser -S nodeapp -u 1001
+
+# Copiar código fonte
+COPY backend/ ./
+
+# Criar diretório para banco de dados
+RUN mkdir -p /app/database && chown -R nodeapp:nodejs /app
+
+# Mudar para usuário não-root
+USER nodeapp
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+  CMD node healthcheck.js
+
+# Expor porta
+EXPOSE 3001
+
+# Comando para produção
+CMD ["npm", "start"]

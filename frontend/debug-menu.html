@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug Menu - Portal de Exames</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Mobile menu overlay */
+        .menu-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 40;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .menu-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        /* Sidebar */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 256px;
+            height: 100%;
+            background: white;
+            border-right: 1px solid #e5e7eb;
+            z-index: 50;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .sidebar.active {
+            transform: translateX(0);
+        }
+        
+        @media (min-width: 768px) {
+            .sidebar {
+                position: static;
+                transform: none;
+                z-index: 0;
+            }
+            
+            .menu-overlay {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        // Component para testar o menu
+        function DebugApp() {
+            const [sidebarOpen, setSidebarOpen] = useState(false);
+
+            const toggleSidebar = () => {
+                console.log('toggleSidebar called, current state:', sidebarOpen);
+                setSidebarOpen(prev => {
+                    console.log('Setting sidebar to:', !prev);
+                    return !prev;
+                });
+            };
+
+            const closeSidebar = () => {
+                console.log('closeSidebar called');
+                setSidebarOpen(false);
+            };
+
+            // Log do estado atual
+            useEffect(() => {
+                console.log('Sidebar state changed to:', sidebarOpen);
+            }, [sidebarOpen]);
+
+            return (
+                <div className="min-h-screen bg-gray-50">
+                    {/* Mobile Menu Button */}
+                    <button
+                        onClick={toggleSidebar}
+                        className="fixed top-4 left-4 z-50 p-2 bg-blue-600 text-white rounded-md md:hidden"
+                        type="button"
+                    >
+                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+
+                    {/* Overlay */}
+                    <div 
+                        className={`menu-overlay ${sidebarOpen ? 'active' : ''}`}
+                        onClick={closeSidebar}
+                    ></div>
+
+                    {/* Sidebar */}
+                    <div className={`sidebar ${sidebarOpen ? 'active' : ''}`}>
+                        <div className="p-6 border-b">
+                            <h2 className="text-xl font-bold">Portal de Exames</h2>
+                        </div>
+                        <nav className="p-4">
+                            <ul className="space-y-2">
+                                <li>
+                                    <a href="#" className="block p-3 rounded hover:bg-gray-100">
+                                        Dashboard
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" className="block p-3 rounded hover:bg-gray-100">
+                                        Meus Exames
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" className="block p-3 rounded hover:bg-gray-100">
+                                        Compartilhamentos
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+
+                    {/* Main Content */}
+                    <div className="md:ml-64 p-6">
+                        <h1 className="text-2xl font-bold mb-4">Debug Menu Test</h1>
+                        <p>Status do sidebar: {sidebarOpen ? 'Aberto' : 'Fechado'}</p>
+                        <button 
+                            onClick={toggleSidebar}
+                            className="mt-4 px-4 py-2 bg-blue-600 text-white rounded"
+                        >
+                            Toggle Sidebar
+                        </button>
+                        
+                        <div className="mt-8 p-4 bg-white rounded shadow">
+                            <h2 className="text-lg font-semibold mb-2">Console Debug</h2>
+                            <p>Abra o console do navegador (F12) para ver os logs de debug.</p>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        // Error boundary para capturar erros
+        class ErrorBoundary extends React.Component {
+            constructor(props) {
+                super(props);
+                this.state = { hasError: false, error: null };
+            }
+
+            static getDerivedStateFromError(error) {
+                return { hasError: true, error };
+            }
+
+            componentDidCatch(error, errorInfo) {
+                console.error('Error caught by boundary:', error, errorInfo);
+            }
+
+            render() {
+                if (this.state.hasError) {
+                    return (
+                        <div className="p-8 text-center">
+                            <h1 className="text-xl font-bold text-red-600 mb-4">Erro encontrado!</h1>
+                            <pre className="text-left text-sm bg-gray-100 p-4 rounded">
+                                {this.state.error?.toString()}
+                            </pre>
+                        </div>
+                    );
+                }
+
+                return this.props.children;
+            }
+        }
+
+        // Render da aplicação
+        ReactDOM.render(
+            <ErrorBoundary>
+                <DebugApp />
+            </ErrorBoundary>,
+            document.getElementById('root')
+        );
+    </script>
+</body>
+</html>
