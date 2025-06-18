@@ -25,76 +25,99 @@
         :root {
             /* Light theme colors */
             --background: 255 255 255;
-            --foreground: 3 7 18;
+            --foreground: 15 23 42;
             --card: 255 255 255;
-            --card-foreground: 3 7 18;
+            --card-foreground: 15 23 42;
             --popover: 255 255 255;
-            --popover-foreground: 3 7 18;
-            --primary: 0 68 151;
-            --primary-foreground: 255 255 255;
-            --secondary: 244 246 248;
-            --secondary-foreground: 15 23 42;
-            --muted: 244 246 248;
+            --popover-foreground: 15 23 42;
+            --primary: 37 99 235;
+            --primary-foreground: 248 250 252;
+            --secondary: 241 245 249;
+            --secondary-foreground: 71 85 105;
+            --muted: 248 250 252;
             --muted-foreground: 100 116 139;
-            --accent: 244 246 248;
-            --accent-foreground: 15 23 42;
-            --destructive: 255 60 60;
-            --destructive-foreground: 255 255 255;
+            --accent: 248 250 252;
+            --accent-foreground: 71 85 105;
+            --destructive: 239 68 68;
+            --destructive-foreground: 248 250 252;
             --border: 226 232 240;
             --input: 226 232 240;
-            --ring: 0 68 151;
+            --ring: 37 99 235;
             --radius: 0.5rem;
         }
 
         .dark {
             /* Dark theme colors */
-            --background: 3 7 18;
+            --background: 2 6 23;
             --foreground: 248 250 252;
             --card: 15 23 42;
             --card-foreground: 248 250 252;
             --popover: 15 23 42;
             --popover-foreground: 248 250 252;
-            --primary: 99 179 237;
-            --primary-foreground: 3 7 18;
+            --primary: 96 165 250;
+            --primary-foreground: 15 23 42;
             --secondary: 30 41 59;
-            --secondary-foreground: 248 250 252;
+            --secondary-foreground: 203 213 225;
             --muted: 30 41 59;
             --muted-foreground: 148 163 184;
             --accent: 30 41 59;
-            --accent-foreground: 248 250 252;
-            --destructive: 239 68 68;
-            --destructive-foreground: 248 250 252;
-            --border: 30 41 59;
-            --input: 30 41 59;
-            --ring: 99 179 237;
+            --accent-foreground: 203 213 225;
+            --destructive: 248 113 113;
+            --destructive-foreground: 15 23 42;
+            --border: 51 65 85;
+            --input: 51 65 85;
+            --ring: 96 165 250;
         }
 
-        /* Apply CSS variables to utility classes */
-        .bg-background { background-color: rgb(var(--background)); }
-        .text-foreground { color: rgb(var(--foreground)); }
-        .bg-card { background-color: rgb(var(--card)); }
-        .text-card-foreground { color: rgb(var(--card-foreground)); }
-        .bg-popover { background-color: rgb(var(--popover)); }
-        .text-popover-foreground { color: rgb(var(--popover-foreground)); }
-        .bg-primary { background-color: rgb(var(--primary)); }
-        .text-primary-foreground { color: rgb(var(--primary-foreground)); }
-        .bg-secondary { background-color: rgb(var(--secondary)); }
-        .text-secondary-foreground { color: rgb(var(--secondary-foreground)); }
-        .bg-muted { background-color: rgb(var(--muted)); }
-        .text-muted-foreground { color: rgb(var(--muted-foreground)); }
-        .bg-accent { background-color: rgb(var(--accent)); }
-        .text-accent-foreground { color: rgb(var(--accent-foreground)); }
-        .bg-destructive { background-color: rgb(var(--destructive)); }
-        .text-destructive-foreground { color: rgb(var(--destructive-foreground)); }
-        .border-border { border-color: rgb(var(--border)); }
-        .border-input { border-color: rgb(var(--input)); }
-        .ring-ring { --tw-ring-color: rgb(var(--ring)); }
+        /* Apply CSS variables to utility classes with !important to override Tailwind */
+        .bg-background { background-color: rgb(var(--background)) !important; }
+        .text-foreground { color: rgb(var(--foreground)) !important; }
+        .bg-card { background-color: rgb(var(--card)) !important; }
+        .text-card-foreground { color: rgb(var(--card-foreground)) !important; }
+        .bg-popover { background-color: rgb(var(--popover)) !important; }
+        .text-popover-foreground { color: rgb(var(--popover-foreground)) !important; }
+        .bg-primary { background-color: rgb(var(--primary)) !important; }
+        .text-primary { color: rgb(var(--primary)) !important; }
+        .text-primary-foreground { color: rgb(var(--primary-foreground)) !important; }
+        .bg-secondary { background-color: rgb(var(--secondary)) !important; }
+        .text-secondary-foreground { color: rgb(var(--secondary-foreground)) !important; }
+        .bg-muted { background-color: rgb(var(--muted)) !important; }
+        .text-muted-foreground { color: rgb(var(--muted-foreground)) !important; }
+        .bg-accent { background-color: rgb(var(--accent)) !important; }
+        .text-accent-foreground { color: rgb(var(--accent-foreground)) !important; }
+        .bg-destructive { background-color: rgb(var(--destructive)) !important; }
+        .text-destructive-foreground { color: rgb(var(--destructive-foreground)) !important; }
+        .border-border { border-color: rgb(var(--border)) !important; }
+        .border-input { border-color: rgb(var(--input)) !important; }
+        .ring-ring { --tw-ring-color: rgb(var(--ring)) !important; }
 
         /* Enhanced transitions for dark mode */
         * {
             transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
         }
     </style>
+    <script>
+        // Initialize theme immediately to prevent flash
+        (function() {
+            const savedTheme = localStorage.getItem('theme') || 'system';
+            let finalTheme = savedTheme;
+            
+            if (savedTheme === 'system') {
+                finalTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+            }
+            
+            const root = document.documentElement;
+            root.classList.remove('dark', 'light');
+            
+            if (finalTheme === 'dark') {
+                root.classList.add('dark');
+            } else {
+                root.classList.add('light');
+            }
+            
+            console.log('Initial theme applied:', finalTheme);
+        })();
+    </script>
     <script>
         tailwind.config = {
             theme: {
@@ -763,13 +786,24 @@
             // Dark Mode Functions - shadcn/ui pattern
             const applyTheme = (newTheme) => {
                 const root = document.documentElement;
+                console.log('Applying theme:', newTheme);
                 
+                // Remove existing theme classes
+                root.classList.remove('dark', 'light');
+                
+                let finalTheme = newTheme;
                 if (newTheme === 'system') {
-                    const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-                    root.classList.toggle('dark', systemTheme === 'dark');
-                } else {
-                    root.classList.toggle('dark', newTheme === 'dark');
+                    finalTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
                 }
+                
+                // Add the appropriate theme class
+                if (finalTheme === 'dark') {
+                    root.classList.add('dark');
+                } else {
+                    root.classList.add('light');
+                }
+                
+                console.log('Theme applied:', finalTheme, 'Classes:', root.classList.toString());
                 
                 // Update theme-color meta tag for mobile browsers
                 const themeColorMeta = document.querySelector('meta[name="theme-color"]');
@@ -780,6 +814,8 @@
             };
 
             const changeTheme = (newTheme) => {
+                console.log('Changing theme to:', newTheme);
+                
                 try {
                     localStorage.setItem('theme', newTheme);
                 } catch (e) {
@@ -2626,45 +2662,57 @@ Equipe Portal de Exames CTC
                                                 {/* Theme Toggle Section */}
                                                 <div className="px-4 py-2">
                                                     <div className="text-xs font-medium text-muted-foreground mb-2">Aparência</div>
-                                                    <div className="flex space-x-1">
+                                                    <div className="flex space-x-1 bg-secondary p-1 rounded-lg">
                                                         <button
-                                                            onClick={() => changeTheme('light')}
-                                                            className={`flex-1 px-2 py-1 text-xs rounded-md transition-colors ${
+                                                            onClick={() => {
+                                                                console.log('Light theme clicked');
+                                                                changeTheme('light');
+                                                            }}
+                                                            className={`flex-1 px-3 py-2 text-xs rounded-md transition-all duration-200 flex items-center justify-center gap-1 ${
                                                                 theme === 'light' 
-                                                                ? 'bg-primary text-primary-foreground' 
-                                                                : 'text-muted-foreground hover:bg-accent'
+                                                                ? 'bg-card text-card-foreground shadow-sm font-medium' 
+                                                                : 'text-muted-foreground hover:text-card-foreground hover:bg-card/50'
                                                             }`}
                                                             title="Modo Claro"
                                                         >
-                                                            <svg className="w-3 h-3 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                            <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
                                                             </svg>
+                                                            <span>Claro</span>
                                                         </button>
                                                         <button
-                                                            onClick={() => changeTheme('dark')}
-                                                            className={`flex-1 px-2 py-1 text-xs rounded-md transition-colors ${
+                                                            onClick={() => {
+                                                                console.log('Dark theme clicked');
+                                                                changeTheme('dark');
+                                                            }}
+                                                            className={`flex-1 px-3 py-2 text-xs rounded-md transition-all duration-200 flex items-center justify-center gap-1 ${
                                                                 theme === 'dark' 
-                                                                ? 'bg-primary text-primary-foreground' 
-                                                                : 'text-muted-foreground hover:bg-accent'
+                                                                ? 'bg-card text-card-foreground shadow-sm font-medium' 
+                                                                : 'text-muted-foreground hover:text-card-foreground hover:bg-card/50'
                                                             }`}
                                                             title="Modo Escuro"
                                                         >
-                                                            <svg className="w-3 h-3 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                            <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
                                                             </svg>
+                                                            <span>Escuro</span>
                                                         </button>
                                                         <button
-                                                            onClick={() => changeTheme('system')}
-                                                            className={`flex-1 px-2 py-1 text-xs rounded-md transition-colors ${
+                                                            onClick={() => {
+                                                                console.log('System theme clicked');
+                                                                changeTheme('system');
+                                                            }}
+                                                            className={`flex-1 px-3 py-2 text-xs rounded-md transition-all duration-200 flex items-center justify-center gap-1 ${
                                                                 theme === 'system' 
-                                                                ? 'bg-primary text-primary-foreground' 
-                                                                : 'text-muted-foreground hover:bg-accent'
+                                                                ? 'bg-card text-card-foreground shadow-sm font-medium' 
+                                                                : 'text-muted-foreground hover:text-card-foreground hover:bg-card/50'
                                                             }`}
                                                             title="Tema do Sistema"
                                                         >
-                                                            <svg className="w-3 h-3 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                            <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                                                             </svg>
+                                                            <span>Auto</span>
                                                         </button>
                                                     </div>
                                                 </div>
