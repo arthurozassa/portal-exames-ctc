@@ -3312,13 +3312,13 @@ Equipe Portal de Exames CTC
                                     <div className="bg-card p-6 rounded-xl shadow-modern border border-border card-hover">
                                         <div className="flex items-center">
                                             <div className="p-2 bg-orange-100 rounded-lg">
-                                                <svg className="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <svg className="w-6 h-6 text-orange-600 dark:text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                                                 </svg>
                                             </div>
                                             <div className="ml-4">
                                                 <h3 className="text-lg font-semibold text-card-foreground">Pendentes</h3>
-                                                <p className="text-3xl font-bold text-orange-600">
+                                                <p className="text-3xl font-bold text-orange-600 dark:text-orange-400">
                                                     {dashboardData?.examStats?.pending || 0}
                                                 </p>
                                             </div>
@@ -3328,13 +3328,13 @@ Equipe Portal de Exames CTC
                                     <div className="bg-card p-6 rounded-xl shadow-modern border border-border card-hover">
                                         <div className="flex items-center">
                                             <div className="p-2 bg-green-100 rounded-lg">
-                                                <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <svg className="w-6 h-6 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                                                 </svg>
                                             </div>
                                             <div className="ml-4">
                                                 <h3 className="text-lg font-semibold text-card-foreground">Compartilhados</h3>
-                                                <p className="text-3xl font-bold text-green-600">
+                                                <p className="text-3xl font-bold text-green-600 dark:text-green-400">
                                                     {dashboardData?.activeShares || 0}
                                                 </p>
                                             </div>
@@ -3344,13 +3344,13 @@ Equipe Portal de Exames CTC
                                     <div className="bg-card p-6 rounded-xl shadow-modern border border-border card-hover">
                                         <div className="flex items-center">
                                             <div className="p-2 bg-purple-100 rounded-lg">
-                                                <svg className="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <svg className="w-6 h-6 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                                                 </svg>
                                             </div>
                                             <div className="ml-4">
                                                 <h3 className="text-lg font-semibold text-card-foreground">Próximo</h3>
-                                                <p className="text-sm font-medium text-purple-600">
+                                                <p className="text-sm font-medium text-purple-600 dark:text-purple-400">
                                                     {dashboardData?.nextExam?.date 
                                                         ? new Date(dashboardData.nextExam.date).toLocaleDateString('pt-BR')
                                                         : 'Nenhum agendado'
@@ -3566,17 +3566,17 @@ Equipe Portal de Exames CTC
                                             <div className="text-center p-3 bg-blue-50 rounded-lg">
                                                 <div className="text-lg font-semibold text-primary">95</div>
                                                 <div className="text-xs text-primary">Glicose atual</div>
-                                                <div className="text-xs text-green-600 mt-1">✓ Normal</div>
+                                                <div className="text-xs text-green-600 dark:text-green-400 mt-1">✓ Normal</div>
                                             </div>
                                             <div className="text-center p-3 bg-green-50 rounded-lg">
-                                                <div className="text-lg font-semibold text-green-600">185</div>
-                                                <div className="text-xs text-green-600">Colesterol atual</div>
-                                                <div className="text-xs text-green-600 mt-1">✓ Normal</div>
+                                                <div className="text-lg font-semibold text-green-600 dark:text-green-400">185</div>
+                                                <div className="text-xs text-green-600 dark:text-green-400">Colesterol atual</div>
+                                                <div className="text-xs text-green-600 dark:text-green-400 mt-1">✓ Normal</div>
                                             </div>
                                             <div className="text-center p-3 bg-yellow-50 rounded-lg">
                                                 <div className="text-lg font-semibold text-yellow-600">140</div>
                                                 <div className="text-xs text-yellow-600">Triglicerídeos</div>
-                                                <div className="text-xs text-green-600 mt-1">✓ Normal</div>
+                                                <div className="text-xs text-green-600 dark:text-green-400 mt-1">✓ Normal</div>
                                             </div>
                                         </div>
                                     </div>
@@ -4414,7 +4414,7 @@ Equipe Portal de Exames CTC
                                                 
                                                 <div className="bg-green-50 border-l-4 border-green-400 p-4">
                                                     <h4 className="font-medium text-green-800">Recomendações</h4>
-                                                    <ul className="text-green-700 mt-2 space-y-1">
+                                                    <ul className="text-green-700 dark:text-green-300 mt-2 space-y-1">
                                                         <li>• Manter dieta equilibrada e atividade física regular</li>
                                                         <li>• Realizar acompanhamento periódico conforme orientação médica</li>
                                                         <li>• Manter-se hidratado e ter bons hábitos de sono</li>
@@ -4426,7 +4426,7 @@ Equipe Portal de Exames CTC
 
                                                 <div className="bg-blue-50 border-l-4 border-blue-400 p-4">
                                                     <h4 className="font-medium text-blue-800">Informações Técnicas</h4>
-                                                    <p className="text-blue-700 mt-2">
+                                                    <p className="text-blue-700 dark:text-blue-300 mt-2">
                                                         Exame realizado por: {examDetails.doctor_name}<br/>
                                                         Data: {new Date(examDetails.exam_date).toLocaleDateString('pt-BR')}<br/>
                                                         Unidade: Paulista<br/>
@@ -4514,7 +4514,7 @@ Equipe Portal de Exames CTC
                                                 <select
                                                     value={selectedParameter}
                                                     onChange={(e) => setSelectedParameter(e.target.value)}
-                                                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                                    className="w-full px-3 py-2 border border-input bg-card text-card-foreground rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
                                                 >
                                                     <optgroup label="🩸 Hematologia">
                                                         <option value="Hemoglobina">Hemoglobina</option>
@@ -4569,7 +4569,7 @@ Equipe Portal de Exames CTC
                                                 <select
                                                     value={timelineMonths}
                                                     onChange={(e) => setTimelineMonths(parseInt(e.target.value))}
-                                                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                                    className="w-full px-3 py-2 border border-input bg-card text-card-foreground rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
                                                 >
                                                     <option value={6}>6 meses</option>
                                                     <option value={12}>12 meses</option>
@@ -4582,7 +4582,7 @@ Equipe Portal de Exames CTC
                                                 <select
                                                     value={medicalCategory}
                                                     onChange={(e) => setMedicalCategory(e.target.value)}
-                                                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                                    className="w-full px-3 py-2 border border-input bg-card text-card-foreground rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
                                                 >
                                                     <option value="todas">Todas as Categorias</option>
                                                     <option value="hematologia">🩸 Hematologia</option>
@@ -4598,7 +4598,7 @@ Equipe Portal de Exames CTC
                                                 <select
                                                     value={resultStatus}
                                                     onChange={(e) => setResultStatus(e.target.value)}
-                                                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                                    className="w-full px-3 py-2 border border-input bg-card text-card-foreground rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
                                                 >
                                                     <option value="todos">Todos os Status</option>
                                                     <option value="normal">🟢 Normal</option>
@@ -4621,7 +4621,7 @@ Equipe Portal de Exames CTC
                                     <div className="p-6">
                                         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
                                             {/* Overall Health Score */}
-                                            <div className="text-center p-4 bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg">
+                                            <div className="text-center p-4 bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/30 rounded-lg">
                                                 <div className="text-3xl font-bold text-primary mb-2">
                                                     {(() => {
                                                         const totalExams = timelineData.length;
@@ -4630,7 +4630,7 @@ Equipe Portal de Exames CTC
                                                         return score;
                                                     })()}%
                                                 </div>
-                                                <div className="text-sm font-medium text-blue-700">Índice de Saúde</div>
+                                                <div className="text-sm font-medium text-blue-700 dark:text-blue-300">Índice de Saúde</div>
                                                 <div className="text-xs text-primary mt-1">
                                                     {(() => {
                                                         const score = timelineData.length > 0 ? Math.round((timelineData.filter(e => e.is_normal).length / timelineData.length) * 100) : 0;
@@ -4643,15 +4643,15 @@ Equipe Portal de Exames CTC
                                             </div>
 
                                             {/* Risk Assessment */}
-                                            <div className="text-center p-4 bg-gradient-to-br from-green-50 to-green-100 rounded-lg">
-                                                <div className="text-2xl font-bold text-green-600 mb-2">
+                                            <div className="text-center p-4 bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900/20 dark:to-green-800/30 rounded-lg">
+                                                <div className="text-2xl font-bold text-green-600 dark:text-green-400 mb-2">
                                                     {(() => {
                                                         const highRisk = timelineData.filter(e => e.risk_level === 'alto').length;
                                                         return highRisk === 0 ? '🟢' : highRisk <= 2 ? '🟡' : '🔴';
                                                     })()}
                                                 </div>
-                                                <div className="text-sm font-medium text-green-700">Nível de Risco</div>
-                                                <div className="text-xs text-green-600 mt-1">
+                                                <div className="text-sm font-medium text-green-700 dark:text-green-300">Nível de Risco</div>
+                                                <div className="text-xs text-green-600 dark:text-green-400 mt-1">
                                                     {(() => {
                                                         const highRisk = timelineData.filter(e => e.risk_level === 'alto').length;
                                                         if (highRisk === 0) return "Baixo";
@@ -4662,8 +4662,8 @@ Equipe Portal de Exames CTC
                                             </div>
 
                                             {/* Trending Analysis */}
-                                            <div className="text-center p-4 bg-gradient-to-br from-purple-50 to-purple-100 rounded-lg">
-                                                <div className="text-2xl font-bold text-purple-600 mb-2">
+                                            <div className="text-center p-4 bg-gradient-to-br from-purple-50 to-purple-100 dark:from-purple-900/20 dark:to-purple-800/30 rounded-lg">
+                                                <div className="text-2xl font-bold text-purple-600 dark:text-purple-400 mb-2">
                                                     {(() => {
                                                         const trends = timelineData.map(e => e.trend);
                                                         const improving = trends.filter(t => t === '↗').length;
@@ -4673,8 +4673,8 @@ Equipe Portal de Exames CTC
                                                         return '📊';
                                                     })()}
                                                 </div>
-                                                <div className="text-sm font-medium text-purple-700">Tendência Geral</div>
-                                                <div className="text-xs text-purple-600 mt-1">
+                                                <div className="text-sm font-medium text-purple-700 dark:text-purple-300">Tendência Geral</div>
+                                                <div className="text-xs text-purple-600 dark:text-purple-400 mt-1">
                                                     {(() => {
                                                         const trends = timelineData.map(e => e.trend);
                                                         const improving = trends.filter(t => t === '↗').length;
@@ -4687,12 +4687,12 @@ Equipe Portal de Exames CTC
                                             </div>
 
                                             {/* Next Actions */}
-                                            <div className="text-center p-4 bg-gradient-to-br from-orange-50 to-orange-100 rounded-lg">
-                                                <div className="text-2xl font-bold text-orange-600 mb-2">
+                                            <div className="text-center p-4 bg-gradient-to-br from-orange-50 to-orange-100 dark:from-orange-900/20 dark:to-orange-800/30 rounded-lg">
+                                                <div className="text-2xl font-bold text-orange-600 dark:text-orange-400 mb-2">
                                                     {timelineData.filter(e => !e.is_normal).length}
                                                 </div>
-                                                <div className="text-sm font-medium text-orange-700">Ações Recomendadas</div>
-                                                <div className="text-xs text-orange-600 mt-1">
+                                                <div className="text-sm font-medium text-orange-700 dark:text-orange-300">Ações Recomendadas</div>
+                                                <div className="text-xs text-orange-600 dark:text-orange-400 mt-1">
                                                     {timelineData.filter(e => !e.is_normal).length === 0 ? "Manter rotina" : "Consultas médicas"}
                                                 </div>
                                             </div>
@@ -4700,14 +4700,14 @@ Equipe Portal de Exames CTC
 
                                         {/* Medical Alerts */}
                                         {timelineData.filter(e => !e.is_normal).length > 0 && (
-                                            <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-4">
-                                                <h4 className="font-semibold text-yellow-800 mb-2 flex items-center">
+                                            <div className="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-700 rounded-lg p-4 mb-4">
+                                                <h4 className="font-semibold text-yellow-800 dark:text-yellow-300 mb-2 flex items-center">
                                                     <span className="mr-2">⚠️</span>
                                                     Alertas Médicos Importantes
                                                 </h4>
                                                 <div className="space-y-2">
                                                     {timelineData.filter(e => !e.is_normal).slice(0, 3).map((alert, index) => (
-                                                        <div key={index} className="text-sm text-yellow-700 bg-yellow-100 p-2 rounded">
+                                                        <div key={index} className="text-sm text-yellow-700 dark:text-yellow-200 bg-yellow-100 dark:bg-yellow-800/30 p-2 rounded">
                                                             <span className="font-medium">{selectedParameter}:</span> {alert.recommendation}
                                                         </div>
                                                     ))}
@@ -4731,7 +4731,7 @@ Equipe Portal de Exames CTC
                                                 const percentage = totalCount > 0 ? Math.round((normalCount / totalCount) * 100) : 0;
                                                 
                                                 return (
-                                                    <div key={category.key} className={`p-3 rounded-lg bg-${category.color}-50 border border-${category.color}-200`}>
+                                                    <div key={category.key} className={`p-3 rounded-lg bg-${category.color}-50 dark:bg-${category.color}-900/20 border border-${category.color}-200 dark:border-${category.color}-700`}>
                                                         <div className="text-center">
                                                             <div className="text-lg mb-1">{category.icon}</div>
                                                             <div className="text-xs font-medium text-card-foreground">{category.name}</div>
@@ -5408,7 +5408,7 @@ Equipe Portal de Exames CTC
                                             <h3 className="text-sm font-medium text-blue-800">
                                                 Sobre as Delegações
                                             </h3>
-                                            <div className="mt-2 text-sm text-blue-700">
+                                            <div className="mt-2 text-sm text-blue-700 dark:text-blue-300">
                                                 <p>As delegações permitem que você autorize médicos específicos a acessar seus exames por um período determinado.</p>
                                                 <ul className="list-disc list-inside mt-2 space-y-1">
                                                     <li>Você pode definir quais permissões cada médico terá</li>
@@ -5541,7 +5541,7 @@ Equipe Portal de Exames CTC
                                                         ...prev,
                                                         preferences: { ...prev.preferences, language: e.target.value }
                                                     }))}
-                                                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                                    className="w-full px-3 py-2 border border-input bg-card text-card-foreground rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
                                                 >
                                                     <option value="pt-BR">Português (Brasil)</option>
                                                     <option value="en-US">English (US)</option>
@@ -5556,7 +5556,7 @@ Equipe Portal de Exames CTC
                                                         ...prev,
                                                         preferences: { ...prev.preferences, timezone: e.target.value }
                                                     }))}
-                                                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                                    className="w-full px-3 py-2 border border-input bg-card text-card-foreground rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
                                                 >
                                                     <option value="America/Sao_Paulo">São Paulo</option>
                                                     <option value="America/New_York">New York</option>
@@ -5571,7 +5571,7 @@ Equipe Portal de Exames CTC
                                                         ...prev,
                                                         preferences: { ...prev.preferences, dateFormat: e.target.value }
                                                     }))}
-                                                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                                    className="w-full px-3 py-2 border border-input bg-card text-card-foreground rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
                                                 >
                                                     <option value="DD/MM/YYYY">DD/MM/YYYY</option>
                                                     <option value="MM/DD/YYYY">MM/DD/YYYY</option>
@@ -5749,7 +5749,7 @@ Equipe Portal de Exames CTC
                                     </div>
                                     
                                     <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
-                                        <p className="text-xs text-blue-700">
+                                        <p className="text-xs text-blue-700 dark:text-blue-300">
                                             💡 Dica: Você também pode fazer upload de arquivos diretamente na página de detalhes de cada exame.
                                         </p>
                                     </div>
@@ -5794,7 +5794,7 @@ Equipe Portal de Exames CTC
                                     <h4 className="font-semibold text-blue-900 uppercase text-sm">
                                         {currentExam.exam_type}
                                     </h4>
-                                    <div className="text-sm text-blue-700 mt-1">
+                                    <div className="text-sm text-blue-700 dark:text-blue-300 mt-1">
                                         <p>Realizado em: {new Date(currentExam.exam_date).toLocaleDateString('pt-BR')}</p>
                                         <p>Unidade: Unidade Paulista</p>
                                     </div>
@@ -6085,7 +6085,7 @@ Equipe Portal de Exames CTC
                                             <div className="flex items-center">
                                                 <div className="flex-shrink-0">
                                                     <div className="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center">
-                                                        <svg className="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <svg className="w-5 h-5 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                                                         </svg>
                                                     </div>
@@ -6101,7 +6101,7 @@ Equipe Portal de Exames CTC
                                             <div className="flex items-center">
                                                 <div className="flex-shrink-0">
                                                     <div className="w-8 h-8 bg-purple-100 rounded-lg flex items-center justify-center">
-                                                        <svg className="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <svg className="w-5 h-5 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z" />
                                                         </svg>
                                                     </div>
@@ -6117,7 +6117,7 @@ Equipe Portal de Exames CTC
                                             <div className="flex items-center">
                                                 <div className="flex-shrink-0">
                                                     <div className="w-8 h-8 bg-orange-100 rounded-lg flex items-center justify-center">
-                                                        <svg className="w-5 h-5 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <svg className="w-5 h-5 text-orange-600 dark:text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                                                         </svg>
                                                     </div>
@@ -6152,21 +6152,21 @@ Equipe Portal de Exames CTC
                                                         <div className="w-3 h-3 bg-green-500 rounded-full mr-3 animate-pulse"></div>
                                                         <span className="font-medium text-slate-700">Backend API</span>
                                                     </div>
-                                                    <span className="text-green-700 font-semibold text-sm">Online</span>
+                                                    <span className="text-green-700 dark:text-green-300 font-semibold text-sm">Online</span>
                                                 </div>
                                                 <div className="flex items-center justify-between p-3 bg-blue-50 rounded-lg border border-blue-200">
                                                     <div className="flex items-center">
                                                         <div className="w-3 h-3 bg-blue-500 rounded-full mr-3"></div>
                                                         <span className="font-medium text-slate-700">Autenticação JWT</span>
                                                     </div>
-                                                    <span className="text-blue-700 font-semibold text-sm">Ativo</span>
+                                                    <span className="text-blue-700 dark:text-blue-300 font-semibold text-sm">Ativo</span>
                                                 </div>
                                                 <div className="flex items-center justify-between p-3 bg-purple-50 rounded-lg border border-purple-200">
                                                     <div className="flex items-center">
                                                         <div className="w-3 h-3 bg-purple-500 rounded-full mr-3"></div>
                                                         <span className="font-medium text-slate-700">Banco SQLite</span>
                                                     </div>
-                                                    <span className="text-purple-700 font-semibold text-sm">Conectado</span>
+                                                    <span className="text-purple-700 dark:text-purple-300 font-semibold text-sm">Conectado</span>
                                                 </div>
                                                 <div className="flex items-center justify-between p-3 bg-amber-50 rounded-lg border border-amber-200">
                                                     <div className="flex items-center">
@@ -6274,13 +6274,13 @@ Equipe Portal de Exames CTC
                                         <div className="bg-card rounded-xl shadow-sm border border-slate-200 p-6">
                                             <div className="flex items-center">
                                                 <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
-                                                    <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <svg className="w-6 h-6 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                                                     </svg>
                                                 </div>
                                                 <div className="ml-4">
                                                     <p className="text-sm font-medium text-slate-600">Usuários Ativos</p>
-                                                    <p className="text-2xl font-bold text-green-700">{userStats.active}</p>
+                                                    <p className="text-2xl font-bold text-green-700 dark:text-green-300">{userStats.active}</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -6300,13 +6300,13 @@ Equipe Portal de Exames CTC
                                         <div className="bg-card rounded-xl shadow-sm border border-slate-200 p-6">
                                             <div className="flex items-center">
                                                 <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
-                                                    <svg className="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <svg className="w-6 h-6 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                                                     </svg>
                                                 </div>
                                                 <div className="ml-4">
                                                     <p className="text-sm font-medium text-slate-600">Grupos</p>
-                                                    <p className="text-2xl font-bold text-purple-700">{userStats.groups}</p>
+                                                    <p className="text-2xl font-bold text-purple-700 dark:text-purple-300">{userStats.groups}</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -6464,7 +6464,7 @@ Equipe Portal de Exames CTC
                                                                         {isBlocked ? (
                                                                             <button 
                                                                                 onClick={() => unlockUser(user.id)}
-                                                                                className="text-green-600 hover:text-green-800 transition-colors"
+                                                                                className="text-green-600 dark:text-green-400 hover:text-green-800 transition-colors"
                                                                                 disabled={loading}
                                                                             >
                                                                                 🔓 Desbloquear
@@ -6472,7 +6472,7 @@ Equipe Portal de Exames CTC
                                                                         ) : (
                                                                             <button 
                                                                                 onClick={() => toggleUserStatus(user.id, !user.ativo)}
-                                                                                className={`${user.ativo ? 'text-red-600 hover:text-red-800' : 'text-green-600 hover:text-green-800'} transition-colors`}
+                                                                                className={`${user.ativo ? 'text-red-600 hover:text-red-800' : 'text-green-600 dark:text-green-400 hover:text-green-800'} transition-colors`}
                                                                                 disabled={loading}
                                                                             >
                                                                                 {user.ativo ? '🚫 Desativar' : '✅ Ativar'}
@@ -6833,7 +6833,7 @@ Equipe Portal de Exames CTC
                                                     </svg>
                                                     <div>
                                                         <p className="text-sm font-medium text-blue-900">Dica de Personalização</p>
-                                                        <p className="text-sm text-blue-700 mt-1">
+                                                        <p className="text-sm text-blue-700 dark:text-blue-300 mt-1">
                                                             As cores serão aplicadas automaticamente em toda a interface. 
                                                             Teste diferentes combinações para encontrar a identidade visual ideal.
                                                         </p>
@@ -6935,7 +6935,7 @@ Equipe Portal de Exames CTC
                                                             type="text"
                                                             value={lgpdTermsVersion}
                                                             onChange={(e) => setLgpdTermsVersion(e.target.value)}
-                                                            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                                            className="w-full px-3 py-2 border border-input bg-card text-card-foreground rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
                                                             placeholder="Ex: v2.1"
                                                         />
                                                     </div>
@@ -6948,7 +6948,7 @@ Equipe Portal de Exames CTC
                                                             type="date"
                                                             value={lgpdEffectiveDate}
                                                             onChange={(e) => setLgpdEffectiveDate(e.target.value)}
-                                                            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                                            className="w-full px-3 py-2 border border-input bg-card text-card-foreground rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
                                                         />
                                                     </div>
                                                 </div>
@@ -6998,7 +6998,7 @@ Equipe Portal de Exames CTC
                                                     <h4 className="text-sm font-medium text-card-foreground mb-3">Estatísticas de Aceitação</h4>
                                                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                                                         <div className="bg-green-50 border border-green-200 rounded-lg p-3">
-                                                            <div className="text-sm text-green-600 font-medium">Usuários que Aceitaram</div>
+                                                            <div className="text-sm text-green-600 dark:text-green-400 font-medium">Usuários que Aceitaram</div>
                                                             <div className="text-2xl font-bold text-green-800">1,156</div>
                                                         </div>
                                                         <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-3">
