@@ -90,6 +90,16 @@
         }
 
         /* Apply CSS variables to utility classes with !important to override Tailwind */
+        /* Force refresh of summary cards */
+        .summary-card-blue { background-color: #dbeafe !important; }
+        .summary-card-green { background-color: #dcfce7 !important; }
+        .summary-card-purple { background-color: #f3e8ff !important; }
+        .summary-card-orange { background-color: #fed7aa !important; }
+        
+        .dark .summary-card-blue { background-color: rgba(30, 58, 138, 0.3) !important; }
+        .dark .summary-card-green { background-color: rgba(20, 83, 45, 0.3) !important; }
+        .dark .summary-card-purple { background-color: rgba(88, 28, 135, 0.3) !important; }
+        .dark .summary-card-orange { background-color: rgba(154, 52, 18, 0.3) !important; }
         .bg-background { background-color: rgb(var(--background)) !important; }
         .text-foreground { color: rgb(var(--foreground)) !important; }
         .bg-card { background-color: rgb(var(--card)) !important; }
@@ -4621,7 +4631,7 @@ Equipe Portal de Exames CTC
                                     <div className="p-6">
                                         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
                                             {/* Overall Health Score */}
-                                            <div className="text-center p-4 bg-blue-100 dark:bg-blue-900/30 rounded-lg">
+                                            <div className="text-center p-4 summary-card-blue rounded-lg">
                                                 <div className="text-3xl font-bold text-blue-700 dark:text-blue-400 mb-2">
                                                     {(() => {
                                                         const totalExams = timelineData.length;
@@ -4643,7 +4653,7 @@ Equipe Portal de Exames CTC
                                             </div>
 
                                             {/* Risk Assessment */}
-                                            <div className="text-center p-4 bg-green-100 dark:bg-green-900/30 rounded-lg">
+                                            <div className="text-center p-4 summary-card-green rounded-lg">
                                                 <div className="text-2xl font-bold text-green-700 dark:text-green-400 mb-2">
                                                     {(() => {
                                                         const highRisk = timelineData.filter(e => e.risk_level === 'alto').length;
@@ -4662,7 +4672,7 @@ Equipe Portal de Exames CTC
                                             </div>
 
                                             {/* Trending Analysis */}
-                                            <div className="text-center p-4 bg-purple-100 dark:bg-purple-900/30 rounded-lg">
+                                            <div className="text-center p-4 summary-card-purple rounded-lg">
                                                 <div className="text-2xl font-bold text-purple-700 dark:text-purple-400 mb-2">
                                                     {(() => {
                                                         const trends = timelineData.map(e => e.trend);
@@ -4687,7 +4697,7 @@ Equipe Portal de Exames CTC
                                             </div>
 
                                             {/* Next Actions */}
-                                            <div className="text-center p-4 bg-orange-100 dark:bg-orange-900/30 rounded-lg">
+                                            <div className="text-center p-4 summary-card-orange rounded-lg">
                                                 <div className="text-2xl font-bold text-orange-700 dark:text-orange-400 mb-2">
                                                     {timelineData.filter(e => !e.is_normal).length}
                                                 </div>
