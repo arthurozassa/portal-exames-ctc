@@ -2,6 +2,9 @@ const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
 
+// Swagger Documentation
+const { swaggerUi, specs } = require('./docs/swagger');
+
 const Database = require('./database/connection');
 const { 
     securityHeaders, 
@@ -48,13 +51,31 @@ app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 // Sanitização de inputs
 app.use(sanitizeInput);
 
+// Swagger Documentation
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs, {
+    explorer: true,
+    customCss: '.swagger-ui .topbar { display: none }',
+    customSiteTitle: 'Portal de Exames CTC - API Documentation',
+    swaggerOptions: {
+        persistAuthorization: true,
+        displayRequestDuration: true,
+        tryItOutEnabled: true
+    }
+}));
+
+// Redirect root to API docs
+app.get('/', (req, res) => {
+    res.redirect('/api-docs');
+});
+
 // Rota de health check
 app.get('/health', (req, res) => {
     res.json({
         success: true,
         message: 'Portal de Exames CTC API - Online',
         timestamp: new Date().toISOString(),
-        version: '1.0.0'
+        version: '1.0.0',
+        documentation: `${req.protocol}://${req.get('host')}/api-docs`
     });
 });
 
