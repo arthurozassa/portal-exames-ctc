@@ -3576,17 +3576,17 @@ Equipe Portal de Exames CTC
                                             <div className="text-center p-3 bg-blue-50 rounded-lg">
                                                 <div className="text-lg font-semibold text-primary">95</div>
                                                 <div className="text-xs text-primary">Glicose atual</div>
-                                                <div className="text-xs text-green-600 dark:text-green-400 mt-1">✓ Normal</div>
+                                                <div className="text-xs text-gray-700 dark:text-green-400 mt-1">✓ Normal</div>
                                             </div>
                                             <div className="text-center p-3 bg-green-50 rounded-lg">
                                                 <div className="text-lg font-semibold text-green-700 dark:text-green-400">185</div>
                                                 <div className="text-xs text-green-700 dark:text-green-400">Colesterol atual</div>
-                                                <div className="text-xs text-green-600 dark:text-green-400 mt-1">✓ Normal</div>
+                                                <div className="text-xs text-gray-700 dark:text-green-400 mt-1">✓ Normal</div>
                                             </div>
                                             <div className="text-center p-3 bg-yellow-50 rounded-lg">
                                                 <div className="text-lg font-semibold text-yellow-600">140</div>
                                                 <div className="text-xs text-yellow-600">Triglicerídeos</div>
-                                                <div className="text-xs text-green-600 dark:text-green-400 mt-1">✓ Normal</div>
+                                                <div className="text-xs text-gray-700 dark:text-green-400 mt-1">✓ Normal</div>
                                             </div>
                                         </div>
                                     </div>
@@ -4632,7 +4632,7 @@ Equipe Portal de Exames CTC
                                         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
                                             {/* Overall Health Score */}
                                             <div className="text-center p-4 summary-card-blue rounded-lg">
-                                                <div className="text-3xl font-bold text-blue-700 dark:text-blue-400 mb-2">
+                                                <div className="text-3xl font-bold text-gray-800 dark:text-blue-400 mb-2">
                                                     {(() => {
                                                         const totalExams = timelineData.length;
                                                         const normalExams = timelineData.filter(e => e.is_normal).length;
@@ -4640,8 +4640,8 @@ Equipe Portal de Exames CTC
                                                         return score;
                                                     })()}%
                                                 </div>
-                                                <div className="text-sm font-medium text-blue-800 dark:text-blue-300">Índice de Saúde</div>
-                                                <div className="text-xs text-blue-600 dark:text-blue-400 mt-1">
+                                                <div className="text-sm font-medium text-gray-900 dark:text-blue-300">Índice de Saúde</div>
+                                                <div className="text-xs text-gray-700 dark:text-blue-400 mt-1">
                                                     {(() => {
                                                         const score = timelineData.length > 0 ? Math.round((timelineData.filter(e => e.is_normal).length / timelineData.length) * 100) : 0;
                                                         if (score >= 80) return "Excelente";
@@ -4654,14 +4654,14 @@ Equipe Portal de Exames CTC
 
                                             {/* Risk Assessment */}
                                             <div className="text-center p-4 summary-card-green rounded-lg">
-                                                <div className="text-2xl font-bold text-green-700 dark:text-green-400 mb-2">
+                                                <div className="text-2xl font-bold text-gray-800 dark:text-green-400 mb-2">
                                                     {(() => {
                                                         const highRisk = timelineData.filter(e => e.risk_level === 'alto').length;
                                                         return highRisk === 0 ? '🟢' : highRisk <= 2 ? '🟡' : '🔴';
                                                     })()}
                                                 </div>
-                                                <div className="text-sm font-medium text-green-800 dark:text-green-300">Nível de Risco</div>
-                                                <div className="text-xs text-green-600 dark:text-green-400 mt-1">
+                                                <div className="text-sm font-medium text-gray-900 dark:text-green-300">Nível de Risco</div>
+                                                <div className="text-xs text-gray-700 dark:text-green-400 mt-1">
                                                     {(() => {
                                                         const highRisk = timelineData.filter(e => e.risk_level === 'alto').length;
                                                         if (highRisk === 0) return "Baixo";
@@ -4673,7 +4673,7 @@ Equipe Portal de Exames CTC
 
                                             {/* Trending Analysis */}
                                             <div className="text-center p-4 summary-card-purple rounded-lg">
-                                                <div className="text-2xl font-bold text-purple-700 dark:text-purple-400 mb-2">
+                                                <div className="text-2xl font-bold text-gray-800 dark:text-purple-400 mb-2">
                                                     {(() => {
                                                         const trends = timelineData.map(e => e.trend);
                                                         const improving = trends.filter(t => t === '↗').length;
@@ -4683,8 +4683,8 @@ Equipe Portal de Exames CTC
                                                         return '📊';
                                                     })()}
                                                 </div>
-                                                <div className="text-sm font-medium text-purple-800 dark:text-purple-300">Tendência Geral</div>
-                                                <div className="text-xs text-purple-600 dark:text-purple-400 mt-1">
+                                                <div className="text-sm font-medium text-gray-900 dark:text-purple-300">Tendência Geral</div>
+                                                <div className="text-xs text-gray-700 dark:text-purple-400 mt-1">
                                                     {(() => {
                                                         const trends = timelineData.map(e => e.trend);
                                                         const improving = trends.filter(t => t === '↗').length;
@@ -4698,11 +4698,11 @@ Equipe Portal de Exames CTC
 
                                             {/* Next Actions */}
                                             <div className="text-center p-4 summary-card-orange rounded-lg">
-                                                <div className="text-2xl font-bold text-orange-700 dark:text-orange-400 mb-2">
+                                                <div className="text-2xl font-bold text-gray-800 dark:text-orange-400 mb-2">
                                                     {timelineData.filter(e => !e.is_normal).length}
                                                 </div>
-                                                <div className="text-sm font-medium text-orange-800 dark:text-orange-300">Ações Recomendadas</div>
-                                                <div className="text-xs text-orange-600 dark:text-orange-400 mt-1">
+                                                <div className="text-sm font-medium text-gray-900 dark:text-orange-300">Ações Recomendadas</div>
+                                                <div className="text-xs text-gray-700 dark:text-orange-400 mt-1">
                                                     {timelineData.filter(e => !e.is_normal).length === 0 ? "Manter rotina" : "Consultas médicas"}
                                                 </div>
                                             </div>
