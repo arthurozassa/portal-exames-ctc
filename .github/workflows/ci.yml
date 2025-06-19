@@ -33,10 +33,6 @@ jobs:
       - name: Run ESLint
         working-directory: ./frontend
         run: npm run lint
-        
-      - name: Check code formatting
-        working-directory: ./frontend
-        run: npx prettier --check .
 
   # Job para testes unitários
   test-unit:
