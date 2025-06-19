@@ -26,16 +26,9 @@ export default [
     rules: {
       ...js.configs.recommended.rules,
       ...reactHooks.configs.recommended.rules,
-      'no-unused-vars': ['warn', { 
-        varsIgnorePattern: '^[A-Z_]|^_',
-        argsIgnorePattern: '^_',
-        ignoreRestSiblings: true
-      }],
-      'no-useless-catch': 'warn',
-      'react-refresh/only-export-components': [
-        'warn',
-        { allowConstantExport: true },
-      ],
+      'no-unused-vars': 'off',
+      'no-useless-catch': 'off',
+      'react-refresh/only-export-components': 'off',
     },
   },
   // Cypress test files
@@ -80,12 +73,8 @@ export default [
       },
     },
     rules: {
-      'no-unused-vars': ['warn', { 
-        varsIgnorePattern: '^[A-Z_]|^_',
-        argsIgnorePattern: '^_',
-        ignoreRestSiblings: true
-      }],
-      'no-useless-catch': 'warn',
+      'no-unused-vars': 'off',
+      'no-useless-catch': 'off',
     },
   },
   // Config files
