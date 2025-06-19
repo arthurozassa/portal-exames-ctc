@@ -14,7 +14,7 @@ export default defineConfig({
     // Test isolation
     testIsolation: true,
     
-    setupNodeEvents(on, config) {
+    setupNodeEvents(_, _config) {
       // implement node event listeners here
     },
     
