@@ -1,0 +1,13 @@
+{
+  "success": true,
+  "data": {
+    "twoFactorRequired": true,
+    "patient": {
+      "id": "1",
+      "cpf": "12345678900",
+      "nome": "João Silva",
+      "email": "joao@test.com"
+    },
+    "token": "temp-token-123"
+  }
+}

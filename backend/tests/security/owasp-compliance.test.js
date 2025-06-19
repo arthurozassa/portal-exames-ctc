@@ -76,8 +76,8 @@ describe('OWASP Security Compliance Tests', () => {
   describe('A03 - Injection Vulnerabilities', () => {
     test('Should prevent SQL injection in login', async () => {
       const maliciousPayload = {
-        cpf: \"' OR '1'='1\",
-        senha: \"' OR '1'='1\"
+        cpf: "' OR '1'='1",
+        senha: "' OR '1'='1"
       };
 
       const response = await request(app)

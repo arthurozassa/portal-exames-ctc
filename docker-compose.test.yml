@@ -1,0 +1,86 @@
+version: '3.8'
+
+services:
+  # Backend service for tests
+  backend-test:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    environment:
+      - NODE_ENV=test
+      - DATABASE_URL=mysql://test_user:test_pass@mysql-test:3306/test_db
+      - JWT_SECRET=test_secret_key_for_testing
+    ports:
+      - "3001:3001"
+    depends_on:
+      - mysql-test
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+    command: npm run test:watch
+
+  # Frontend test service
+  frontend-test:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    environment:
+      - NODE_ENV=test
+      - VITE_API_URL=http://backend-test:3001/api
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    command: npm run test:watch
+
+  # Cypress E2E tests
+  cypress:
+    build:
+      context: .
+      dockerfile: Dockerfile.tests
+    environment:
+      - CYPRESS_baseUrl=http://frontend-test:5173
+      - NODE_ENV=test
+    depends_on:
+      - frontend-test
+      - backend-test
+    volumes:
+      - ./frontend/cypress:/app/frontend/cypress
+      - ./cypress-results:/app/cypress-results
+    command: |
+      sh -c "
+        wait-on http://frontend-test:5173 http://backend-test:3001 &&
+        cd frontend &&
+        npm run cypress:run
+      "
+
+  # Database for tests
+  mysql-test:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: test_db
+      MYSQL_USER: test_user
+      MYSQL_PASSWORD: test_pass
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_test_data:/var/lib/mysql
+      - ./backend/database/test-schema.sql:/docker-entrypoint-initdb.d/schema.sql
+    command: --default-authentication-plugin=mysql_native_password
+
+  # Test reporting service
+  test-reports:
+    image: nginx:alpine
+    ports:
+      - "8080:80"
+    volumes:
+      - ./test-reports:/usr/share/nginx/html:ro
+      - ./nginx-test.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - cypress
+
+volumes:
+  mysql_test_data:
+  cypress_results:

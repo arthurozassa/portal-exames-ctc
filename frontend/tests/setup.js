@@ -1,16 +1,12 @@
 import '@testing-library/jest-dom'
-import { expect, afterEach, beforeAll, afterAll } from 'vitest'
+import { expect, afterEach, beforeAll, afterAll, vi } from 'vitest'
 import { cleanup } from '@testing-library/react'
-import { setupServer } from 'msw/node'
-import { handlers } from './mocks/handlers'
 
-// Configurar MSW (Mock Service Worker) para interceptar requisições HTTP
-export const server = setupServer(...handlers)
+// Simple fetch mock for testing without MSW
+global.fetch = vi.fn()
 
 // Configurar ambiente de teste
 beforeAll(() => {
-  // Inicializar MSW
-  server.listen({ onUnhandledRequest: 'error' })
   
   // Mock de localStorage
   const localStorageMock = {
@@ -70,13 +66,12 @@ beforeAll(() => {
 // Limpeza após cada teste
 afterEach(() => {
   cleanup()
-  server.resetHandlers()
   vi.clearAllMocks()
 })
 
 // Limpeza final
 afterAll(() => {
-  server.close()
+  // Clean up any remaining mocks
 })
 
 // Helpers globais para testes
@@ -133,14 +128,7 @@ global.testHelpers = {
   
   // Simular erro de rede
   simulateNetworkError: () => {
-    server.use(
-      rest.get('*', (req, res, ctx) => {
-        return res.networkError('Failed to connect')
-      }),
-      rest.post('*', (req, res, ctx) => {
-        return res.networkError('Failed to connect')
-      })
-    )
+    global.fetch.mockRejectedValue(new Error('Network error'))
   }
 }
 

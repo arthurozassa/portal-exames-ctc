@@ -1,0 +1,303 @@
+name: Performance & Accessibility Tests
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  schedule:
+    # Run performance tests daily at 2 AM UTC
+    - cron: '0 2 * * *'
+
+jobs:
+  lighthouse:
+    name: Lighthouse Performance Tests
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+          cache-dependency-path: frontend/package-lock.json
+          
+      - name: Install dependencies
+        working-directory: ./frontend
+        run: npm ci --legacy-peer-deps
+        
+      - name: Build application
+        working-directory: ./frontend
+        run: npm run build
+        
+      - name: Start application
+        working-directory: ./frontend
+        run: |
+          npm run preview &
+          npx wait-on http://localhost:4173
+          
+      - name: Run Lighthouse CI
+        uses: treosh/lighthouse-ci-action@v10
+        with:
+          configPath: './frontend/lighthouserc.json'
+          uploadArtifacts: true
+          temporaryPublicStorage: true
+          
+      - name: Comment performance results on PR
+        if: github.event_name == 'pull_request'
+        uses: treosh/lighthouse-ci-action@v10
+        with:
+          configPath: './frontend/lighthouserc.json'
+          uploadArtifacts: true
+          temporaryPublicStorage: true
+
+  accessibility:
+    name: Accessibility Tests
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+          cache-dependency-path: frontend/package-lock.json
+          
+      - name: Install dependencies
+        working-directory: ./frontend
+        run: |
+          npm ci --legacy-peer-deps
+          npm install --save-dev cypress-axe
+          
+      - name: Build application
+        working-directory: ./frontend
+        run: npm run build
+        
+      - name: Start application
+        working-directory: ./frontend
+        run: |
+          npm run preview &
+          npx wait-on http://localhost:4173
+          
+      - name: Run accessibility tests
+        working-directory: ./frontend
+        run: npx cypress run --spec "cypress/e2e/accessibility/**/*.cy.js"
+        env:
+          CYPRESS_baseUrl: http://localhost:4173
+          
+      - name: Upload accessibility test results
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: accessibility-results
+          path: frontend/cypress/reports/accessibility
+
+  bundle-analysis:
+    name: Bundle Size Analysis
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+          cache-dependency-path: frontend/package-lock.json
+          
+      - name: Install dependencies
+        working-directory: ./frontend
+        run: npm ci --legacy-peer-deps
+        
+      - name: Build application with bundle analysis
+        working-directory: ./frontend
+        run: |
+          npm run build
+          npx vite-bundle-analyzer dist --analyze
+          
+      - name: Check bundle size
+        uses: preactjs/compressed-size-action@v2
+        with:
+          repo-token: "${{ secrets.GITHUB_TOKEN }}"
+          pattern: "./frontend/dist/**/*.{js,css}"
+          exclude: "{**/*.map,**/node_modules/**}"
+          
+      - name: Comment bundle size on PR
+        if: github.event_name == 'pull_request'
+        uses: preactjs/compressed-size-action@v2
+        with:
+          repo-token: "${{ secrets.GITHUB_TOKEN }}"
+          pattern: "./frontend/dist/**/*.{js,css}"
+          exclude: "{**/*.map,**/node_modules/**}"
+
+  visual-regression:
+    name: Visual Regression Tests
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+          cache-dependency-path: frontend/package-lock.json
+          
+      - name: Install dependencies
+        working-directory: ./frontend
+        run: npm ci --legacy-peer-deps
+        
+      - name: Build application
+        working-directory: ./frontend
+        run: npm run build
+        
+      - name: Start application
+        working-directory: ./frontend
+        run: |
+          npm run preview &
+          npx wait-on http://localhost:4173
+          
+      - name: Run visual regression tests
+        working-directory: ./frontend
+        run: npx cypress run --spec "cypress/e2e/visual/**/*.cy.js"
+        env:
+          CYPRESS_baseUrl: http://localhost:4173
+          
+      - name: Upload visual test results
+        if: failure()
+        uses: actions/upload-artifact@v3
+        with:
+          name: visual-regression-diffs
+          path: frontend/cypress/screenshots/visual
+
+  mobile-testing:
+    name: Mobile Device Testing
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        device: [
+          'iPhone 12',
+          'iPad Air',
+          'Samsung Galaxy S20',
+          'Pixel 5'
+        ]
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+          cache-dependency-path: frontend/package-lock.json
+          
+      - name: Install dependencies
+        working-directory: ./frontend
+        run: npm ci --legacy-peer-deps
+        
+      - name: Build application
+        working-directory: ./frontend
+        run: npm run build
+        
+      - name: Start application
+        working-directory: ./frontend
+        run: |
+          npm run preview &
+          npx wait-on http://localhost:4173
+          
+      - name: Run mobile tests on ${{ matrix.device }}
+        working-directory: ./frontend
+        run: |
+          npx cypress run \
+            --config viewportWidth=375,viewportHeight=667 \
+            --spec "cypress/e2e/mobile/**/*.cy.js" \
+            --env device="${{ matrix.device }}"
+        env:
+          CYPRESS_baseUrl: http://localhost:4173
+          
+      - name: Upload mobile test screenshots
+        if: failure()
+        uses: actions/upload-artifact@v3
+        with:
+          name: mobile-test-screenshots-${{ matrix.device }}
+          path: frontend/cypress/screenshots
+
+  load-testing:
+    name: Load Testing
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+          cache-dependency-path: frontend/package-lock.json
+          
+      - name: Install dependencies
+        working-directory: ./frontend
+        run: npm ci --legacy-peer-deps
+        
+      - name: Build application
+        working-directory: ./frontend
+        run: npm run build
+        
+      - name: Start application
+        working-directory: ./frontend
+        run: |
+          npm run preview &
+          npx wait-on http://localhost:4173
+          
+      - name: Install Artillery
+        run: npm install -g artillery
+        
+      - name: Run load tests
+        working-directory: ./frontend
+        run: |
+          artillery quick --count 10 --num 100 http://localhost:4173 > load-test-results.txt
+          cat load-test-results.txt
+          
+      - name: Upload load test results
+        uses: actions/upload-artifact@v3
+        with:
+          name: load-test-results
+          path: frontend/load-test-results.txt
+
+  performance-monitoring:
+    name: Performance Monitoring
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    
+    steps:
+      - name: Monitor performance metrics
+        uses: GoogleChrome/web-vitals-gha@v1
+        with:
+          url: ${{ secrets.PRODUCTION_URL }}
+          
+      - name: Send metrics to monitoring service
+        run: |
+          curl -X POST "${{ secrets.MONITORING_WEBHOOK_URL }}" \
+            -H "Content-Type: application/json" \
+            -d '{
+              "event": "performance_check",
+              "url": "${{ secrets.PRODUCTION_URL }}",
+              "commit": "${{ github.sha }}",
+              "timestamp": "'$(date -u +%Y-%m-%dT%H:%M:%SZ)'"
+            }'

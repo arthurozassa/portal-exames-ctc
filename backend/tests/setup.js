@@ -1,6 +1,9 @@
 const { seedDatabase } = require('../database/seed');
 const db = require('../src/models/database');
 
+// Import test helpers
+require('./helpers/testHelpers');
+
 // Setup global para testes
 beforeAll(async () => {
   // Conectar ao banco de dados em memória

@@ -1,0 +1,35 @@
+# Dockerfile for running tests in CI/CD
+FROM cypress/browsers:node18.12.0-chrome107-ff107
+
+WORKDIR /app
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    xvfb \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy package files
+COPY frontend/package*.json ./frontend/
+COPY backend/package*.json ./backend/
+
+# Install dependencies
+RUN cd frontend && npm ci --legacy-peer-deps
+RUN cd backend && npm ci
+
+# Copy source code
+COPY frontend/ ./frontend/
+COPY backend/ ./backend/
+
+# Set environment variables
+ENV NODE_ENV=test
+ENV CYPRESS_CACHE_FOLDER=/app/.cypress
+ENV CI=true
+
+# Create cypress cache directory
+RUN mkdir -p /app/.cypress
+
+# Expose ports
+EXPOSE 3001 5173
+
+# Default command runs all tests
+CMD ["npm", "run", "test:all"]
